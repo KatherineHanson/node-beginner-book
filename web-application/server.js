@@ -2,14 +2,16 @@
 
 // FINAL CODE FOR CREATING A SERVER
 // AND MESSAGE OUTPUT
-
 var http = require('http');
 var url = require('url');
 
-function start() {
+function start(route) {
   function onRequest(request, response) {
     var pathname = url.parse(request.url).pathname;
-    console.log('Request received.');
+    console.log('Request for ' + pathname + ' received.');
+
+    route(pathname);
+
     response.writeHead(200, {'Content-Type': 'text/plain'});
     response.write('Hello World');
     response.end();
